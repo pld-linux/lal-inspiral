@@ -6,7 +6,7 @@ Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	%{name}-%{version}.tar.xz
-# Source0-md5:	0bd817900241b04e6a4e5a01a99f9a21
+# Source0-md5:	87b9e53659c570bb3488b8d30608b36e
 Source1:	lalsuite_build.m4
 Source2:	lalsuite_c99.m4
 Source3:	lalsuite_gccflags.m4
