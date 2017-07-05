@@ -2,7 +2,7 @@ Summary:	LAL routines for inspiral and ringdown CBC gravitational wave data anal
 Summary(pl.UTF-8):	Procedury LAL do analizy danych fal grawitacyjnych układów podwójnych
 Name:		lal-inspiral
 Version:	1.7.7
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
@@ -75,7 +75,7 @@ Statyczna biblioteka lal-inspiral.
 Summary:	Octave interface for LAL Inspiral
 Summary(pl.UTF-8):	Interfejs Octave do biblioteki LAL Inspiral
 Group:		Applications/Math
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	octave-lal >= 6.18.0
 
 %description -n octave-lalinspiral
@@ -88,9 +88,14 @@ Interfejs Octave do biblioteki LAL Inspiral.
 Summary:	Python bindings for LAL Inspiral
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki LAL Inspiral
 Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	python-lal >= 6.18.0
+Requires:	python-lalsimulation >= 1.7.0
 Requires:	python-modules >= 1:2.6
+Requires:	python-numpy
+Requires:	python-scipy
+#python-glue (glue.iterutils, glue.ligolw)
+#Suggests:	python-pycuda
 
 %description -n python-lalinspiral
 Python bindings for LAL Inspiral.
