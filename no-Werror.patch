@@ -1,0 +1,10 @@
+--- lalinspiral-1.9.0/gnuscripts/lalsuite_gccflags.m4~	2018-12-20 17:16:39.000000000 +0100
++++ lalinspiral-1.9.0/gnuscripts/lalsuite_gccflags.m4	2019-11-03 21:45:32.395571991 +0100
+@@ -30,7 +30,6 @@
+       -g3
+       -Wall
+       -W
+-      -Werror
+       -Wmissing-prototypes
+       -Wstrict-prototypes
+       -Wshadow

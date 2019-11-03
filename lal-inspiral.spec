@@ -1,14 +1,15 @@
 Summary:	LAL routines for inspiral and ringdown CBC gravitational wave data analysis
 Summary(pl.UTF-8):	Procedury LAL do analizy danych fal grawitacyjnych układów podwójnych
 Name:		lal-inspiral
-Version:	1.7.7
-Release:	2
+Version:	1.9.0
+Release:	1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/lalinspiral-%{version}.tar.xz
-# Source0-md5:	9dd7f5d18f094735fd547d980eac6088
+# Source0-md5:	d3a9b4574c6981cf7f0a1e2666cf6335
 Patch0:		%{name}-env.patch
+Patch1:		no-Werror.patch
 URL:		https://wiki.ligo.org/DASWG/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
@@ -106,6 +107,7 @@ Wiązania Pythona do biblioteki LAL Inspiral.
 %prep
 %setup -q -n lalinspiral-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -143,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lalinspiral_version
 %attr(755,root,root) %{_libdir}/liblalinspiral.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.10
+%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.14
 /etc/shrc.d/lalinspiral-user-env.csh
 /etc/shrc.d/lalinspiral-user-env.fish
 /etc/shrc.d/lalinspiral-user-env.sh
@@ -152,7 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/liblalinspiral.so
 %{_includedir}/lal/BBHPhenomCoeffs.h
-%{_includedir}/lal/Chisq_*.h
 %{_includedir}/lal/CoherentInspiral.h
 %{_includedir}/lal/CoincInspiralEllipsoid.h
 %{_includedir}/lal/FindChirp*.h
@@ -178,7 +179,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/lal/RingUtils.h
 %{_includedir}/lal/SWIGLALInspiralTest.h
 %{_includedir}/lal/SWIGLALInspiral*.i
-%{_includedir}/lal/SimulateInspiral.h
 %{_includedir}/lal/TemplateBankGeneration.h
 %{_includedir}/lal/TrigScanEThincaCommon.h
 %{_includedir}/lal/swiglalinspiral.i
@@ -196,5 +196,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{py_sitedir}/lalinspiral
 %attr(755,root,root) %{py_sitedir}/lalinspiral/_lalinspiral.so
+%attr(755,root,root) %{py_sitedir}/lalinspiral/_thinca.so
 %{py_sitedir}/lalinspiral/*.py[co]
 %{py_sitedir}/lalinspiral/sbank
