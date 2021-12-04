@@ -15,6 +15,7 @@ BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gsl-devel >= 1.13
 BuildRequires:	lal-devel >= 6.18.0
+BuildRequires:	lal-burst-devel
 BuildRequires:	lal-frame-devel >= 1.4.3
 BuildRequires:	lal-metaio-devel >= 1.3.1
 BuildRequires:	lal-simulation-devel >= 1.7.0
