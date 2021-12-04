@@ -1,13 +1,13 @@
 Summary:	LAL routines for inspiral and ringdown CBC gravitational wave data analysis
 Summary(pl.UTF-8):	Procedury LAL do analizy danych fal grawitacyjnych układów podwójnych
 Name:		lal-inspiral
-Version:	1.9.0
+Version:	2.0.3
 Release:	1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/lalinspiral-%{version}.tar.xz
-# Source0-md5:	d3a9b4574c6981cf7f0a1e2666cf6335
+# Source0-md5:	4de85003454f6bfab3fe8b9a47ec627d
 Patch0:		%{name}-env.patch
 Patch1:		no-Werror.patch
 URL:		https://wiki.ligo.org/DASWG/LALSuite
@@ -23,8 +23,8 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	metaio-devel
 BuildRequires:	octave-devel >= 1:3.2.0
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.6
-BuildRequires:	python-numpy-devel >= 1:1.7
+BuildRequires:	python3-devel
+BuildRequires:	python3-numpy-devel
 BuildRequires:	swig >= 3.0.12
 BuildRequires:	swig-python >= 2.0.12
 BuildRequires:	tar >= 1:1.22
@@ -85,23 +85,23 @@ Octave interface for LAL Inspiral.
 %description -n octave-lalinspiral -l pl.UTF-8
 Interfejs Octave do biblioteki LAL Inspiral.
 
-%package -n python-lalinspiral
+%package -n python3-lalinspiral
 Summary:	Python bindings for LAL Inspiral
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki LAL Inspiral
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	python-lal >= 6.18.0
-Requires:	python-lalsimulation >= 1.7.0
-Requires:	python-modules >= 1:2.6
-Requires:	python-numpy
-Requires:	python-scipy
-#python-glue (glue.iterutils, glue.ligolw)
-#Suggests:	python-pycuda
+Requires:	python3-lal >= 6.18.0
+Requires:	python3-lalsimulation >= 1.7.0
+Requires:	python3-modules >= 1:2.6
+Requires:	python3-numpy
+Requires:	python3-scipy
+#python3-glue (glue.iterutils, glue.ligolw)
+#Suggests:	python3-pycuda
 
-%description -n python-lalinspiral
+%description -n python3-lalinspiral
 Python bindings for LAL Inspiral.
 
-%description -n python-lalinspiral -l pl.UTF-8
+%description -n python3-lalinspiral -l pl.UTF-8
 Wiązania Pythona do biblioteki LAL Inspiral.
 
 %prep
@@ -133,8 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/shrc.d
 %{__mv} $RPM_BUILD_ROOT%{_sysconfdir}/*sh $RPM_BUILD_ROOT/etc/shrc.d
 
-%py_postclean
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -145,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lalinspiral_version
 %attr(755,root,root) %{_libdir}/liblalinspiral.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.14
+%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.16
 /etc/shrc.d/lalinspiral-user-env.csh
 /etc/shrc.d/lalinspiral-user-env.fish
 /etc/shrc.d/lalinspiral-user-env.sh
@@ -154,19 +152,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/liblalinspiral.so
 %{_includedir}/lal/BBHPhenomCoeffs.h
-%{_includedir}/lal/CoherentInspiral.h
 %{_includedir}/lal/CoincInspiralEllipsoid.h
 %{_includedir}/lal/FindChirp*.h
 %{_includedir}/lal/GenerateInspRing.h
 %{_includedir}/lal/GenerateInspiral.h
 %{_includedir}/lal/GeneratePPNInspiral.h
-%{_includedir}/lal/GenerateRing.h
-%{_includedir}/lal/Inject.h
 %{_includedir}/lal/InspiralInjectionParams.h
 %{_includedir}/lal/LALEOBNRv2Waveform.h
 %{_includedir}/lal/LALInspiral*.h
 %{_includedir}/lal/LALNoiseModelsInspiral.h
-%{_includedir}/lal/LALPSpinInspiralRD.h
 %{_includedir}/lal/LALSQTPN*.h
 %{_includedir}/lal/LALSTPNWaveform*.h
 %{_includedir}/lal/LALTrigScanCluster.h
@@ -192,10 +186,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/octave/*/site/oct/*/lalinspiral.oct
 
-%files -n python-lalinspiral
+%files -n python3-lalinspiral
 %defattr(644,root,root,755)
-%dir %{py_sitedir}/lalinspiral
-%attr(755,root,root) %{py_sitedir}/lalinspiral/_lalinspiral.so
-%attr(755,root,root) %{py_sitedir}/lalinspiral/_thinca.so
-%{py_sitedir}/lalinspiral/*.py[co]
-%{py_sitedir}/lalinspiral/sbank
+%dir %{py3_sitedir}/lalinspiral
+%attr(755,root,root) %{py3_sitedir}/lalinspiral/_lalinspiral.so
+%attr(755,root,root) %{py3_sitedir}/lalinspiral/_thinca.so
+%{py3_sitedir}/lalinspiral/*.py
+%{py3_sitedir}/lalinspiral/__pycache__
+%dir %{py3_sitedir}/lalinspiral/sbank
+%{py3_sitedir}/lalinspiral/sbank/*.py
+%{py3_sitedir}/lalinspiral/sbank/__pycache__
