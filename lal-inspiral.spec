@@ -1,40 +1,42 @@
 Summary:	LAL routines for inspiral and ringdown CBC gravitational wave data analysis
 Summary(pl.UTF-8):	Procedury LAL do analizy danych fal grawitacyjnych układów podwójnych
 Name:		lal-inspiral
-Version:	2.0.3
-Release:	3
+Version:	3.0.2
+Release:	1
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
-Source0:	http://software.ligo.org/lscsoft/source/lalsuite/lalinspiral-%{version}.tar.xz
-# Source0-md5:	4de85003454f6bfab3fe8b9a47ec627d
+Source0:	http://software.igwn.org/lscsoft/source/lalsuite/lalinspiral-%{version}.tar.xz
+# Source0-md5:	02008786f384f2c6005867b1c8248b1e
 Patch0:		%{name}-env.patch
 Patch1:		no-Werror.patch
-URL:		https://wiki.ligo.org/DASWG/LALSuite
+URL:		https://wiki.ligo.org/Computing/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	gsl-devel >= 1.13
-BuildRequires:	lal-devel >= 6.18.0
-BuildRequires:	lal-burst-devel
-BuildRequires:	lal-frame-devel >= 1.4.3
-BuildRequires:	lal-metaio-devel >= 1.3.1
-BuildRequires:	lal-simulation-devel >= 1.7.0
+BuildRequires:	help2man
+BuildRequires:	lal-devel >= 7.2.2
+BuildRequires:	lal-burst-devel >= 1.6.0
+BuildRequires:	lal-frame-devel >= 2.0.0
+BuildRequires:	lal-metaio-devel >= 3.0.0
+BuildRequires:	lal-simulation-devel >= 4.0.0
 BuildRequires:	libframe-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	metaio-devel
 BuildRequires:	octave-devel >= 1:3.2.0
 BuildRequires:	pkgconfig
-BuildRequires:	python3-devel
-BuildRequires:	python3-numpy-devel
-BuildRequires:	swig >= 3.0.12
-BuildRequires:	swig-python >= 2.0.12
+BuildRequires:	python3-devel >= 1:3.5
+BuildRequires:	python3-numpy-devel >= 1:1.7
+BuildRequires:	swig >= 4.1.0
+BuildRequires:	swig-python >= 3.0.11
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	gsl >= 1.13
-Requires:	lal >= 6.18.0
-Requires:	lal-frame >= 1.4.3
-Requires:	lal-metaio >= 1.3.1
-Requires:	lal-simulation >= 1.7.0
+Requires:	lal >= 7.2.2
+Requires:	lal-burst >= 1.6.0
+Requires:	lal-frame >= 2.0.0
+Requires:	lal-metaio >= 3.0.0
+Requires:	lal-simulation >= 4.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,9 +52,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki lal-inspiral
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	gsl-devel >= 1.13
-Requires:	lal-devel >= 6.18.0
-Requires:	lal-metaio-devel >= 1.3.1
-Requires:	lal-simulation-devel >= 1.7.0
+Requires:	lal-devel >= 7.2.2
+Requires:	lal-metaio-devel >= 3.0.0
+Requires:	lal-simulation-devel >= 4.0.0
 Requires:	metaio-devel
 
 %description devel
@@ -78,7 +80,7 @@ Summary:	Octave interface for LAL Inspiral
 Summary(pl.UTF-8):	Interfejs Octave do biblioteki LAL Inspiral
 Group:		Applications/Math
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	octave-lal >= 6.18.0
+Requires:	octave-lal >= 7.2.2
 
 %description -n octave-lalinspiral
 Octave interface for LAL Inspiral.
@@ -91,13 +93,14 @@ Summary:	Python bindings for LAL Inspiral
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki LAL Inspiral
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	python3-lal >= 6.18.0
-Requires:	python3-lalsimulation >= 1.7.0
-Requires:	python3-modules >= 1:2.6
-Requires:	python3-numpy
+Requires:	python3-lal >= 7.2.2
+Requires:	python3-lalsimulation >= 4.0.0
+Requires:	python3-lscsoft-glue
+Requires:	python3-modules >= 1:3.5
+Requires:	python3-numpy >= 1:1.7
 Requires:	python3-scipy
-#python3-glue (glue.iterutils, glue.ligolw)
 #Suggests:	python3-pycuda
+Obsoletes:	python-lalinspiral < 1:2
 
 %description -n python3-lalinspiral
 Python bindings for LAL Inspiral.
@@ -128,6 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/lalinspiral/_thinca.{a,la}
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/liblalinspiral.la
 
@@ -144,10 +148,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lalinspiral_version
 %attr(755,root,root) %{_libdir}/liblalinspiral.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.16
+%attr(755,root,root) %ghost %{_libdir}/liblalinspiral.so.17
 /etc/shrc.d/lalinspiral-user-env.csh
 /etc/shrc.d/lalinspiral-user-env.fish
 /etc/shrc.d/lalinspiral-user-env.sh
+%{_mandir}/man1/lalinspiral_version.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -189,6 +194,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python3-lalinspiral
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/lalinspiral_injfind
+%attr(755,root,root) %{_bindir}/lalinspiral_thinca
 %dir %{py3_sitedir}/lalinspiral
 %attr(755,root,root) %{py3_sitedir}/lalinspiral/_lalinspiral.so
 %attr(755,root,root) %{py3_sitedir}/lalinspiral/_thinca.so
@@ -197,3 +204,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/lalinspiral/sbank
 %{py3_sitedir}/lalinspiral/sbank/*.py
 %{py3_sitedir}/lalinspiral/sbank/__pycache__
+%{_mandir}/man1/lalinspiral_injfind.1*
+%{_mandir}/man1/lalinspiral_thinca.1*
