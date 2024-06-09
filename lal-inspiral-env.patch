@@ -1,7 +1,7 @@
---- lalinspiral-1.7.7/Makefile.am.orig	2015-03-27 05:14:39.000000000 +0100
-+++ lalinspiral-1.7.7/Makefile.am	2017-07-02 21:10:16.094489089 +0200
-@@ -23,11 +23,6 @@
- user_environment = \
+--- lalinspiral-5.0.0/Makefile.am.orig	2024-06-08 21:30:37.891311974 +0200
++++ lalinspiral-5.0.0/Makefile.am	2024-06-08 21:33:38.490333585 +0200
+@@ -26,11 +26,6 @@ user_environment = \
+ 	trailingcolon MANPATH; \
  	set $(PACKAGE)_PREFIX $(prefix); \
  	set $(PACKAGE)_DATADIR $(pkgdatadir); \
 -	prepend MANPATH $(mandir); \
