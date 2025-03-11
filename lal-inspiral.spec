@@ -2,7 +2,7 @@ Summary:	LAL routines for inspiral and ringdown CBC gravitational wave data anal
 Summary(pl.UTF-8):	Procedury LAL do analizy danych fal grawitacyjnych układów podwójnych
 Name:		lal-inspiral
 Version:	5.0.0
-Release:	
+Release:	2
 Epoch:		1
 License:	GPL v2
 Group:		Libraries
@@ -110,8 +110,8 @@ Wiązania Pythona do biblioteki LAL Inspiral.
 
 %prep
 %setup -q -n lalinspiral-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
 
 %build
 %{__libtoolize}
